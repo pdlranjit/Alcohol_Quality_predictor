@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
+from pydantic import BaseModel,Field
 import joblib
 import pandas as pd
 import numpy as np
@@ -11,8 +11,8 @@ model=joblib.load('my_trained_model.pkl')
 scaler=joblib.load('scaler.pkl')
 
 class WineInput(BaseModel):
-    fixed_acidity: float
-    volatile_acidity: float
+    fixed_acidity: float = Field(...,example=3.4,description="Fixed Accidity level",gt=0,lt=15),
+    volatile_acidity: float= Field(...,example=3.2,description="Volatile acidity",gt=0,lt=5),
     citric_acid: float
     residual_sugar: float
     chlorides: float
@@ -35,7 +35,7 @@ def predict_quality(data: WineInput):
     # Convert input to array
     input_data = np.array([[
         data.fixed_acidity,
-        data.volatile_acidity,
+        data.volatile_acidit,
         data.citric_acid,
         data.residual_sugar,
         data.chlorides,
