@@ -11,8 +11,8 @@ model=joblib.load('my_trained_model.pkl')
 scaler=joblib.load('scaler.pkl')
 
 class WineInput(BaseModel):
-    fixed_acidity: float = Field(...,example=3.4,description="Fixed Accidity level",gt=0,lt=15),
-    volatile_acidity: float= Field(...,example=3.2,description="Volatile acidity",gt=0,lt=5),
+    fixed_acidity: float = Field(...,example=3.4,description="Fixed Accidity level",ge=0,lt=15),
+    volatile_acidity: float= Field(...,example=3.2,description="Volatile acidity",ge=0,lt=5),
     citric_acid: float
     residual_sugar: float
     chlorides: float
